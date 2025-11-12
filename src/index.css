@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.btn{
+    text-transform: uppercase;
+}
