@@ -1,10 +1,10 @@
 const links = [
   { id: 1, url: "/", text: "home" },
-  { id: 1, url: "about", text: "about" },
-  { id: 1, url: "products", text: "products" },
-  { id: 1, url: "cart", text: "cart" },
-  { id: 1, url: "checkout", text: "checkout" },
-  { id: 1, url: "orders", text: "orders" },
+  { id: 2, url: "about", text: "about" },
+  { id: 3, url: "products", text: "products" },
+  { id: 4, url: "cart", text: "cart" },
+  { id: 5, url: "checkout", text: "checkout" },
+  { id: 6, url: "orders", text: "orders" },
 ];
 
 import { NavLink } from "react-router-dom";
