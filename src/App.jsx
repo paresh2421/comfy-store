@@ -13,54 +13,64 @@ import {
   Checkout,
   Orders,
 } from "./pages";
+import { ErrorElement } from "./components";
+
+// loaders
+import {loader as landingLoader} from './pages/Landing'
+import {loader as singleProductLoader} from './pages/SingleProduct'
+//actions
+
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <HomeLayout />,
     errorElement: <Error />,
-    children:[
+    children: [
       {
         index: true,
-        element: <Landing />
+        element: <Landing />,
+        loader: landingLoader,
+        errorElement: ErrorElement,
       },
       {
-        path: 'products',
-        element: <Products />
+        path: "products",
+        element: <Products />,
       },
       {
-        path: 'products/:id',
-        element: <SingleProduct />
+        path: "products/:id",
+        element: <SingleProduct />,
+        loader: singleProductLoader
       },
       {
-        path: 'cart',
-        element: <Cart />
+        path: "cart",
+        element: <Cart />,
       },
       {
-        path: 'about',
-        element: <About />
+        path: "about",
+        element: <About />,
       },
       {
-        path: 'checkout',
-        element: <Checkout />
+        path: "checkout",
+        element: <Checkout />,
       },
       {
-        path: 'orders',
-        element: <Orders />
+        path: "orders",
+        element: <Orders />,
       },
-    ]
+    ],
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
-    errorElement: <Error />
+    errorElement: <Error />,
   },
   {
-    path: '/register',
+    path: "/register",
     element: <Register />,
-    errorElement: <Error />
+    errorElement: <Error />,
   },
-])
+]);
 
 const App = () => {
   return <RouterProvider router={router} />;
