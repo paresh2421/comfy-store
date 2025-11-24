@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { currencyFormat, customFetch } from "../utils";
+import { currencyFormat, customFetch, generateAmountOptions } from "../utils";
 import { useState } from "react";
 
 export const loader = async ({ params }) => {
@@ -48,6 +48,44 @@ const SingleProduct = () => {
           </h4>
           <p className="mt-3 text-xl">{currencyAmount}</p>
           <p className="mt-6 leading-8">{description}</p>
+          <div className="mt-6">
+            <h4 className="text-md font-medium tracking-wider capitalize">
+              colors
+            </h4>
+            {/* Colors */}
+            <div className="mt-2">
+              {colors.map((color) => {
+                return (
+                  <button
+                    type="button"
+                    key={color}
+                    className={`badge  w-6 h-6 mr-2 ${
+                      color === productColor && "border-0 border-secondary"
+                    }`}
+                    style={{ backgroundColor: color }}
+                    onClick={() => setProductColor(color)}
+                  ></button>
+                );
+              })}
+            </div>
+            {/* Amount */}
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <h4 className="text-md font-medium tracking-wider capitalize">
+                  amount
+                </h4>
+              </label>
+              <select className="select select-secondary select-bordered select-md" value={amount} onChange={handleAmount}>
+                {generateAmountOptions(5)}
+              </select>
+            </div>
+            {/* cart button */}
+            <div className="mt-10">
+              <button className="btn btn-secondary btn-md" onClick={()=>console.log('add to bag')}>
+                Add to bag
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
