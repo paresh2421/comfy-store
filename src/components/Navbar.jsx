@@ -5,7 +5,7 @@ import NavLinks from "./NavLinks";
 import { useState, useEffect } from "react";
 const themes = {
   light: "lemonade",
-  dark: "halloween",
+  dark: "dracula",
 };
 
 const getThemeFromLocalStorage = () => {
