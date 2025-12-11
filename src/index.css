@@ -7,6 +7,10 @@
   text-transform: uppercase;
 }
 
+.form-control {
+  display: flex;
+  flex-direction: column;
+}
 @layer components {
   .align-element {
     @apply mx-auto max-w-6xl px-8;
