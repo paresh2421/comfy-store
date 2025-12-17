@@ -1,6 +1,8 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { currencyFormat, customFetch, generateAmountOptions } from "../utils";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/cart/cartSlice";
 
 export const loader = async ({ params }) => {
   const response = await customFetch(`products/${params.id}`);
@@ -11,6 +13,8 @@ export const loader = async ({ params }) => {
 };
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
+
   const { productDetails } = useLoaderData();
   const { image, title, price, description, colors, company } =
     productDetails.attributes;
@@ -18,10 +22,23 @@ const SingleProduct = () => {
   const [productColor, setProductColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
 
+  const cartProduct = {
+    cartID: productDetails.id + productColor,
+    productID: productDetails.id,
+    image,
+    title,
+    price,
+    amount,
+    productColor,
+    company,
+  };
   const handleAmount = (e) => {
     setAmount(parseInt(e.target.value));
   };
 
+  const addToCart = () => {
+    dispatch(addItem({ product: cartProduct }));
+  };
   return (
     <section>
       <div className="text-md breadcrumbs">
@@ -75,13 +92,17 @@ const SingleProduct = () => {
                   amount
                 </h4>
               </label>
-              <select className="select select-secondary select-bordered select-md" value={amount} onChange={handleAmount}>
+              <select
+                className="select select-secondary select-bordered select-md"
+                value={amount}
+                onChange={handleAmount}
+              >
                 {generateAmountOptions(5)}
               </select>
             </div>
             {/* cart button */}
             <div className="mt-10">
-              <button className="btn btn-secondary btn-md" onClick={()=>console.log('add to bag')}>
+              <button className="btn btn-secondary btn-md" onClick={addToCart}>
                 Add to bag
               </button>
             </div>
