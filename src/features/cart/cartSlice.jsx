@@ -33,7 +33,8 @@ const cartSlice = createSlice({
       state.cartTotal += product.price * product.amount;
 
       cartSlice.caseReducers.calculateTotals(state);
-
+      console.log(state.cartTotal);
+      
       toast.success("Item added to the cart");
     },
     clearCart: (state) => {
