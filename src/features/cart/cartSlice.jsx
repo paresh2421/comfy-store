@@ -56,7 +56,6 @@ const cartSlice = createSlice({
     editItem: (state, action) => {
       const { cartID, amount } = action.payload;
       const product = state.cartItems.find((i) => i.cartID === cartID);
-      state.cartItems = state.cartItems.filter((i) => i.cartID !== cartID);
 
       state.numItemsInCart += amount - product.amount;
       state.cartTotal += product.price * (amount - product.amount);
