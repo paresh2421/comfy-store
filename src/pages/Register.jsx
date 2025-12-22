@@ -1,11 +1,30 @@
 import { FormInput, SubmitBtn } from "../components";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, redirect } from "react-router-dom";
+import { customFetch } from "../utils";
+import { toast } from "react-toastify";
+
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
+
+  try {
+    const response = await customFetch.post("/auth/local/register", data);
+    toast.success("Account created, please login");
+    return redirect("/login");
+  } catch (error) {
+    const errorMsg =
+      error?.response?.data?.error?.message || "please double check your creds";
+    toast.error(errorMsg);
+    return null;
+  }
+};
 
 const Register = () => {
   return (
     <section className="h-screen grid place-items-center">
       <Form
-        method="post"
+        method="POST"
         className="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4"
       >
         <h4 className="text-center text-3xl font-bold">Register</h4>

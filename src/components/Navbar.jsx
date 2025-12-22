@@ -5,16 +5,14 @@ import NavLinks from "./NavLinks";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/user/userSlice";
 
-
-
 const Navbar = () => {
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const changeTheme = () => {
-    dispatch(toggleTheme())
+    dispatch(toggleTheme());
   };
 
-  const numItemsInCart = useSelector((state)=>state.cartState.numItemsInCart)
+  const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
 
   return (
     <nav className="bg-base-200">
