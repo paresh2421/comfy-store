@@ -6,7 +6,7 @@ import FormInput from "./FormInput";
 import SubmitBtn from "./SubmitBtn";
 
 export const action =
-  (store) =>
+  (store, queryClient) =>
   async ({ request }) => {
     const formData = await request.formData();
     const { name, address } = Object.fromEntries(formData);
@@ -33,12 +33,12 @@ export const action =
           },
         }
       );
-
+queryClient.removeQueries(['orders'])
       store.dispatch(clearCart());
       toast.success("order placed");
       return redirect("/orders");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       const errorMessage =
         error?.response?.data?.error?.message ||
         "there was an error placing your order";
